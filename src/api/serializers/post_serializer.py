@@ -3,13 +3,15 @@ from src.config.restplus import api
 
 
 post_request = api.model('Post Request', {
-    'text': fields.String(required=True, description='text post'),
-    'author_id': fields.Integer(required=True, description='post author ID ')
+    'title': fields.String(required=True, description='Title of the post'),
+    'subtitle': fields.String(required=True, description='Subtitle of the post'),
+    'author_id': fields.Integer(required=True, description='Author Id of the post')
 })
 
 post_result = api.model('Post Result', {
     'id': fields.Integer(required=True, description='Post Id'),
-    'text': fields.String(required=True, description='text post'),
-    'author_id': fields.Integer(required=True, description='post author ID'),
-    'created': fields.String(required=True, description='date post created')
+    'title': fields.String(required=True, description='Title of the post'),
+    'subtitle': fields.String(required=True, description='Subtitle of the post'),
+    'author_id': fields.Integer(required=True, description='Post author Id'),
+    'created': fields.String(required=True, description='Date post created')
 })

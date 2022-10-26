@@ -6,7 +6,8 @@ class Post(db.Model):
     __tablename__ = 'post'
 
     id = db.Column(db.Integer, primary_key=True) 
-    text = db.Column(db.Text())
+    title = db.Column(db.Text())
+    subtitle = db.Column(db.Text())
     created = db.Column(db.DateTime) 
     author_id = db.Column(
         db.Integer, db.ForeignKey('author.id', ondelete='CASCADE'))

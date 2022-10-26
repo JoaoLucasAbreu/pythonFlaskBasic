@@ -14,9 +14,13 @@ from src.services.author_service import get as get_author
 def create(data):
     try:
 
-        text = data.get('text')
-        if not text:
-            json_abort(400,"text is required")
+        title = data.get('title')
+        if not title:
+            json_abort(400,"title is required")
+
+        subtitle = data.get('subtitle')
+        if not subtitle:
+            json_abort(400,"subtitle is required")
 
         author_id = data.get('author_id')
         if not author_id:
@@ -26,7 +30,7 @@ def create(data):
  
         created = datetime.datetime.now()
 
-        post = Post(text=text,created=created, author_id=author_id,author=author)
+        post = Post(title=title, subtitle=subtitle ,created=created , author_id=author_id,author=author)
         db.session.add(post)
         db.session.commit()
 
@@ -61,13 +65,17 @@ def change(id, data):
             json_abort(400,"Post not found")
         else:
 
-            text = data.get('text')
-            if not text:
-                json_abort(400,"text is required")
+            title = data.get('title')
+            if not title:
+                json_abort(400,"title is required")
+                
+            subtitle = data.get('subtitle')
+            if not subtitle:
+                json_abort(400,"subtitle is required")
  
-            post.text = text 
+            post.title = title
+            post.subtitle = subtitle
             
-            db.session.delete(post)
             db.session.commit()
         
             return post

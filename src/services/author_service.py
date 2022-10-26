@@ -10,16 +10,16 @@ from sqlalchemy.exc import SQLAlchemyError
 def create(data):
     try:
 
-        first_name = data.get('first_name')
-        if not first_name:
-            json_abort(400,"First Name is required")
-
-        last_name = data.get('last_name')
-        if not last_name:
-            json_abort(400,"Last Name is required")
+        name = data.get('name')
+        if not name:
+            json_abort(400,"Name is required")
+            
+        age = data.get('age')
+        if not age:
+            json_abort(400,"Age is required")
 
  
-        author = Author(first_name=first_name,last_name=last_name)
+        author = Author(name=name, age=age)
         db.session.add(author)
         db.session.commit()
 
@@ -54,19 +54,18 @@ def change(id, data):
             json_abort(400,"Author not found")
         else:
 
-            first_name = data.get('first_name')
-            if not first_name:
-                json_abort(400,"First Name is required")
+            name = data.get('name')
+            if not name:
+                json_abort(400,"Name is required")
+                
+            age = data.get('age')
+            if not age:
+                json_abort(400,"Age is required")
 
-            last_name = data.get('last_name')
-            if not last_name:
-                json_abort(400,"Last Name is required")
 
-
-            author.first_name = first_name
-            author.last_name = last_name
+            author.name = name
+            author.age = age
             
-            db.session.delete(author)
             db.session.commit()
         
             return author
