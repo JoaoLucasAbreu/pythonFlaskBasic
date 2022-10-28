@@ -1,8 +1,8 @@
 from flask import request
 from flask_restplus import Resource
 from src.config.restplus import api
-from src.api.serializers.author_serializer import author_request, author_result
-from src.services.author_service import create, change, delete, get
+from src.api.serializers.author_serializer import author_request, author_result, author_posts_result
+from src.services.author_service import create, change, delete, getPosts
  
 
 ns = api.namespace('api/author', description='Operations related to author')
@@ -23,12 +23,12 @@ class AuthorCollection(Resource):
 
 @ns.route('/<int:id>')
 class AuthorIDCollection(Resource): 
-    @api.marshal_with(author_result)
+    @api.marshal_with(author_posts_result)
     def get(self, id):
         """
-        Get author by ID
+        Get all posts from an single author by ID
         """ 
-        author = get(id)
+        author = getPosts(id)
         return author 
 
 
