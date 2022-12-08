@@ -35,16 +35,12 @@ def create(data):
 def getPosts(id):
     try:
         author = Author.query.filter_by(id=id).first()
-
+        author.posts = Post.query.filter_by(author_id=id).all()
+        
         if not author:
             json_abort(400,"Author not found")
         else:
-            posts = Post.query.filter_by(author_id=id).all()
-            return {"id":author.id,
-                    "name": author.name,
-                    "age": author.age,
-                    "posts": posts
-                    }
+            return author
 
     except SQLAlchemyError as err: 
         db.session.rollback()
